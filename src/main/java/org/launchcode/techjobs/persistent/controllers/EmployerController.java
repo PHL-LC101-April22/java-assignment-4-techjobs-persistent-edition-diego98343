@@ -43,7 +43,6 @@ public class EmployerController {
         }else{
             employerRepository.save(newEmployer);
         }
-
         return "redirect:";
     }
 
