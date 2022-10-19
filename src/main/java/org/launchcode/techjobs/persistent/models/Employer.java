@@ -15,14 +15,17 @@ import java.util.List;
 
 @Entity
 public class Employer extends AbstractEntity {
+
 @NotEmpty
-@Size(min = 3,max = 50)
-@Length(min = 3,max = 50)
+@Size(min = 3,max = 20)
+@Length(min = 3,max = 20)
 @NotNull
 private String location;
 
-    @JoinColumn(name = "employer_id")
-    @OneToMany()
+
+
+    @JoinColumn(name = "employer")
+    @OneToMany
     private final  List<Job> jobs= new ArrayList<>();
 
     public Employer(String location) {
@@ -30,6 +33,11 @@ private String location;
     }
 
     public Employer() {
+    }
+
+    public Employer(int id, String name, String location) {
+        super(id, name);
+        this.location = location;
     }
 
     public List<Job> getJobs() {

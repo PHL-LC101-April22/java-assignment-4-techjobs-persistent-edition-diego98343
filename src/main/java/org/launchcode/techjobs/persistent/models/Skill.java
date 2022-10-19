@@ -3,20 +3,31 @@ package org.launchcode.techjobs.persistent.models;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Skill extends AbstractEntity {
 
-    @NotEmpty
-    @Size(min = 3,max = 50)
-    @Length(min = 3,max = 50)
+    @NotEmpty(message = "field is empty")
+    @Size(min = 3,max = 20)
+    @Length(min = 3,max = 20)
     public String description;
+
 
 
     public Skill() {
     }
+
+    public Skill(int id, String name, String description) {
+        super(id, name);
+        this.description = description;
+    }
+
+
 
     public String getDescription() {
         return description;

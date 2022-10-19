@@ -1,14 +1,16 @@
 package org.launchcode.techjobs.persistent.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class  Job extends AbstractEntity{
 
 
-
     @ManyToOne()
     private Employer employer;
+
     private String skills;
 
     public Job() {
@@ -21,7 +23,6 @@ public class  Job extends AbstractEntity{
     }
 
     // Getters and setters.
-
 
     public Employer getEmployer() {
         return employer;

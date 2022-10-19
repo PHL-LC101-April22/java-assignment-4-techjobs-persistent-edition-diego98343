@@ -23,7 +23,7 @@ public class EmployerController {
 
     @GetMapping("")
    public String index(Model model){
-        model.addAttribute("employers",employerRepository.findAll());
+        model.addAttribute("employers", employerRepository.findAll());
         return "employers/index";
     }
 
@@ -37,6 +37,7 @@ public class EmployerController {
     @PostMapping("add")
     public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
                                     Errors errors, Model model) {
+        model.addAttribute("error","empty");
         if (errors.hasErrors()) {
             return "employers/add";
         }else{

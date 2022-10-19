@@ -11,13 +11,28 @@ import java.util.Objects;
 @MappedSuperclass
 public abstract class AbstractEntity {
 
-    @GeneratedValue
     @Id
+    @GeneratedValue
     private int id;
    @NotNull
    @NotBlank
    @Size(min = 3, max = 50)
     private String name;
+
+
+    public AbstractEntity(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
+    public AbstractEntity() {
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;
