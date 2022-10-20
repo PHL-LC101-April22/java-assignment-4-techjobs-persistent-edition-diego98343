@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.persistent.controllers;
 
+import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.launchcode.techjobs.persistent.models.data.JobRepository;
@@ -22,9 +23,8 @@ import java.util.Optional;
 
 @Controller
 public class HomeController {
-
     @Autowired
-    private EmployerRepository employerRepository;
+    EmployerRepository employerRepository;
 
     @Autowired
     private  SkillRepository skillRepository;
@@ -57,9 +57,17 @@ public class HomeController {
             model.addAttribute("title", "Add Job");
             return "add";
         }else{
+            Optional<Employer> result= employerRepository.findById(employerId);
 
-            employerRepository.findById(employerId);
-            jobRepository.save(newJob);
+            if(result.isEmpty()){
+                model.addAttribute("title","No Job Found");
+            }else{
+               Employer employer= result.get();
+               employer.getJobs().add(newJob);
+               jobRepository.save(newJob);
+
+            }
+
         }
 
         return "redirect:";

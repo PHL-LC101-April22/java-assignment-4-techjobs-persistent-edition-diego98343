@@ -18,7 +18,7 @@ public class EmployerController {
 
 
     @Autowired
-    private EmployerRepository employerRepository;
+    public EmployerRepository employerRepository;
 
 
     @GetMapping("")
