@@ -61,17 +61,13 @@ public class HomeController {
         }else{
 
             Optional<Employer> result= employerRepository.findById(employerId);
+
+            List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
             if(result.isEmpty()){
                 model.addAttribute("title","No Job Found");
 
             }else{
-
-                for(int skillId :skills){
-                    Optional<Skill> skillResult= skillRepository.findById(skillId);
-                    Skill skill= skillResult.get();
-                    skill.getJobs().add(newJob);
-
-                }
+                    newJob.setSkills(skillObjs);
                     Employer employer= result.get();
                     employer.getJobs().add(newJob);
                     jobRepository.save(newJob);
