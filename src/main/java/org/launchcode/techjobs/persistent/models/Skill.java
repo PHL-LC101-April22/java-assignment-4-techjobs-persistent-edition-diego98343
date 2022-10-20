@@ -6,9 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Skill extends AbstractEntity {
@@ -19,17 +17,16 @@ public class Skill extends AbstractEntity {
     public String description;
 
     @ManyToMany(mappedBy = "skills")
-    private final Collection<Job> jobs= new ArrayList<>();
-
+    private final List<Job> jobs= new ArrayList<>();
     public Skill() {
     }
 
-    public Skill(int id, String name, String description) {
+    public Skill(int id, String name, String description ) {
         super(id, name);
         this.description = description;
     }
 
-    public Collection<Job> getJobs() {
+    public List<Job> getJobs() {
         return jobs;
     }
 
@@ -40,4 +37,7 @@ public class Skill extends AbstractEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
+
 }
