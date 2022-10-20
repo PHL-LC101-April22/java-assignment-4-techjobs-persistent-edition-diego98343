@@ -24,7 +24,7 @@ private String location;
 
 
 
-    @JoinColumn(name = "employer")
+    @JoinColumn(name = "employer_id")
     @OneToMany
     private final  List<Job> jobs= new ArrayList<>();
 
