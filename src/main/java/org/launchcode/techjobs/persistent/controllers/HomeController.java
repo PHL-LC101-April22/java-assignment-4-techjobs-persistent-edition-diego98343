@@ -2,6 +2,7 @@ package org.launchcode.techjobs.persistent.controllers;
 
 import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
+import org.launchcode.techjobs.persistent.models.Skill;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.launchcode.techjobs.persistent.models.data.JobRepository;
 import org.launchcode.techjobs.persistent.models.data.SkillRepository;
@@ -61,19 +62,21 @@ public class HomeController {
             if(result.isEmpty()){
                 model.addAttribute("title","No Job Found");
             }else{
-               Employer employer= result.get();
-               employer.getJobs().add(newJob);
-               jobRepository.save(newJob);
+                for(int skillId :skills){
+                    Optional<Skill> skillResult= skillRepository.findById(skillId);
+                    Skill skill= skillResult.get();
+                    skill.getJobs().add(newJob);
+                }
+                    Employer employer= result.get();
+                    employer.getJobs().add(newJob);
+                    jobRepository.save(newJob);
             }
-
         }
-
         return "redirect:";
     }
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
-
         Optional optJob= jobRepository.findById(jobId);
         if(optJob.isPresent()){
             Job job =(Job) optJob.get();
